@@ -35,7 +35,7 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
     // Recogida de datos
     String radioSeleccionado = "Soltero";
     // Lista
-    public static ArrayList <Persona> listaPersonas;
+    ArrayList <Persona> listaPersonas;
     public Introducir() {
         // Llamas metodo initgui como en la clase ventana
         initGUI();
@@ -95,6 +95,7 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
         // Botones
         buttonSalir.addActionListener(this);
         buttonInsertar.addActionListener(this);
+        // Radio 2
     }
     // Lista
     private void rellenarLista(){
@@ -150,9 +151,9 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
         configurarGridBagDerecho(1, 3, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 1, 1, radioCasado);
         configurarGridBagDerecho(2, 3, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 1, 1, radioDivorciado);
         configurarGridBagDerecho(0, 4, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 1, 1, labelAños);
-        configurarGridBagDerecho(1, 4, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 1, 1, spinnerAños);
+        configurarGridBagDerecho(1, 4, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 2, 1, spinnerAños);
         configurarGridBagDerecho(0, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 1, 1, buttonInsertar);
-        configurarGridBagDerecho(2, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 1, 1, buttonSalir);
+        configurarGridBagDerecho(2, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 1, 2, 1, buttonSalir);
         return panelCentroDerecho;
     }
     private void configurarGridBagIzquierdo(int posX, int posY,int fill, int anchor,double pesX, double pesY, int tamX, int tamY, JComponent component){
@@ -234,7 +235,7 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
         grupoRadios.clearSelection();
     }
     // Llamar
-    public static ArrayList<Persona> getListaPersonas() {
+    public ArrayList<Persona> getListaPersonas() {
         return listaPersonas;
     }
 }

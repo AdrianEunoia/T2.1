@@ -23,6 +23,10 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
     JList listaCarreras;
     DefaultListModel modeloLista;
     ListSelectionModel modeloSeleccionLista;
+    // Lista resultados
+    JList listaResultados;
+    DefaultListModel modeloListaResultados;
+    ListSelectionModel modeloSeleccionListaResultados;
     // Spinner
     JSpinner spinnerAños;
     SpinnerNumberModel modeloSpinner;
@@ -30,9 +34,11 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
     JTextArea areaResultado;
     // Arraylist recogida
     ArrayList <Persona> listaPersonasRecogida;
-    public Buscar() {
+    public Buscar(Introducir objetoEntero) {
         // Llamas metodo initgui como en la clase ventana
         initGUI();
+        // Recojo objeto
+        listaPersonasRecogida = objetoEntero.getListaPersonas();
     }
 
     private void initGUI() {
@@ -60,6 +66,10 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
         modeloLista = new DefaultListModel();
         listaCarreras = new JList(modeloLista);
         modeloSeleccionLista = listaCarreras.getSelectionModel();
+        // Lista
+        modeloListaResultados = new DefaultListModel();
+        listaResultados = new JList(modeloListaResultados);
+        modeloSeleccionListaResultados = listaResultados.getSelectionModel();
         // Botones
         buttonBuscar = new JButton("Buscar");
         buttonSalir = new JButton("Salir");
@@ -109,7 +119,7 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
         configurarGridBagCentro(0, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 0, 1, 1, labelSelecciona);
         configurarGridBagCentro(0, 6, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 1, 0, 2, 1,  new JScrollPane(listaCarreras));
         configurarGridBagCentro(0, 7, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 0, 1, 1,  labelResultados);
-        configurarGridBagCentro(0, 8, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 0.5, 2, 2,  new JScrollPane(areaResultado));
+        configurarGridBagCentro(0, 8, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER, 1, 0, 2, 1,  new JScrollPane(listaResultados));
         return  panelCentro;
     }
     private void configurarGridBagCentro(int posX, int posY,int fill, int anchor,double pesX, double pesY, int tamX, int tamY, JComponent component){
@@ -138,11 +148,10 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
             }else {
                 System.out.println("Procedienco a buscar persona");
                 // Buscar Persona
-                listaPersonasRecogida = Introducir.getListaPersonas();
                 if (!listaPersonasRecogida.isEmpty()) {
                     for (Persona personaEncontrada : listaPersonasRecogida) {
                         if (personaEncontrada.getTelefono().equals(TelefonoIntro)){
-                            areaResultado.setText(personaEncontrada.getNombre()+" - "+personaEncontrada.getEstudios());
+                            modeloListaResultados.addElement(personaEncontrada.getNombre()+" - "+personaEncontrada.getEstudios());
                         }
                     }
                 }

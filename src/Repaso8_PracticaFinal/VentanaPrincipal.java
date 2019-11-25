@@ -27,7 +27,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     // Metodo lanzador
     public void initGUI(){
         this.setTitle("Proyecto CV");
-        this.setSize(new Dimension(700,500));
+        this.setSize(new Dimension(700,600));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -49,7 +49,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         // Paneles
         panelCentro = new JPanel();
         panelIntroducir = new Introducir();
-        panelBuscar = new Buscar();
+        panelBuscar = new Buscar(panelIntroducir);
     }
     private void configurarMenu() {
         barraMenu.add(menuOpciones);
@@ -84,5 +84,4 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
             cardLayout.show(panelCentro, Constantes.TAG_P2);
         }
     }
-    // Lista
 }
