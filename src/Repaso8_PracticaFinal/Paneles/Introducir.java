@@ -35,7 +35,7 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
     // Recogida de datos
     String radioSeleccionado = "Soltero";
     // Lista
-    ArrayList <Persona> listaPersonas;
+    public static ArrayList <Persona> listaPersonas;
     public Introducir() {
         // Llamas metodo initgui como en la clase ventana
         initGUI();
@@ -179,14 +179,12 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
         constraints.gridheight= tamY;
         panelCentroDerecho.add(component,constraints);
     }
-
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()){
             System.out.println("Valor cambiado");
         }
     }
-
     @Override
     public void stateChanged(ChangeEvent e) {
         if (e.getSource() == radioSoltero) {
@@ -236,24 +234,7 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
         grupoRadios.clearSelection();
     }
     // Llamar
-    public void encontrarDatos(String telefonoPasado, String dniPasado) {
-        System.out.println(telefonoPasado);
-        System.out.println(dniPasado);
-        if (!listaPersonas.isEmpty()) {
-            for (Persona personaEncontrada : listaPersonas) {
-                if (personaEncontrada.getTelefono().equals(telefonoPasado) && personaEncontrada.getDni().equals(dniPasado))
-                    System.out.println(personaEncontrada.getNombre());
-                    System.out.println(personaEncontrada.getNombre());
-                    String nombreEncontrado = personaEncontrada.getNombre();
-                    String carreraEncontrada = personaEncontrada.getEstudios();
-                    inserccionDatos(nombreEncontrado,carreraEncontrada);
-            }
-        }
-    }
-    // Pasar datos a lista
-    private Buscar buscar;
-    public void inserccionDatos(String nombre, String carrera) {
-        Buscar buscar = new Buscar();
-        buscar.pintarDatos(nombre,carrera);
+    public static ArrayList<Persona> getListaPersonas() {
+        return listaPersonas;
     }
 }

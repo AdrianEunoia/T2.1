@@ -28,6 +28,8 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
     SpinnerNumberModel modeloSpinner;
     // TextArea
     JTextArea areaResultado;
+    // Arraylist recogida
+    ArrayList <Persona> listaPersonasRecogida;
     public Buscar() {
         // Llamas metodo initgui como en la clase ventana
         initGUI();
@@ -136,8 +138,14 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
             }else {
                 System.out.println("Procedienco a buscar persona");
                 // Buscar Persona
-                busquedaDatos(TelefonoIntro,dniIntro);
-
+                listaPersonasRecogida = Introducir.getListaPersonas();
+                if (!listaPersonasRecogida.isEmpty()) {
+                    for (Persona personaEncontrada : listaPersonasRecogida) {
+                        if (personaEncontrada.getTelefono().equals(TelefonoIntro)){
+                            areaResultado.setText(personaEncontrada.getNombre()+" - "+personaEncontrada.getEstudios());
+                        }
+                    }
+                }
             }
         }else if(e.getSource()==buttonSalir){
             System.out.println("Vaciando campos");
@@ -159,17 +167,4 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
             System.out.println("Valor cambiado");
         }
     }
-    // Llamar
-    private Introducir introducir;
-    public void busquedaDatos(String telefono, String dni) {
-        Introducir introducir = new Introducir();
-        introducir.encontrarDatos(telefono,dni);
-    }
-    // Recoger datos
-    public void pintarDatos(String nombrePasado, String carreraPasada) {
-        System.out.println(nombrePasado);
-        System.out.println(carreraPasada);
-        areaResultado.setText(nombrePasado+" - "+carreraPasada);
-    }
-
 }

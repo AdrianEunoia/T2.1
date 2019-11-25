@@ -84,4 +84,5 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
             cardLayout.show(panelCentro, Constantes.TAG_P2);
         }
     }
+    // Lista
 }
