@@ -16,7 +16,7 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
     // Elementos
     JLabel labelTitulo;
     JLabel labelSpinner;
-    JLabel labelElementos, labelNumeros, labelLetras;
+    JLabel labelElementos, labelNumeros, labelLetras,labelLista;
     JLabel labelCombo;
     JTextField textElemento, textNumeros, textLetras;
     // Botones
@@ -28,7 +28,10 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
     // Combo
     JComboBox comboNormal;
     DefaultComboBoxModel modeloCombo;
-    // Restricciones teclado
+    // Lista
+    JList listaRellenable;
+    DefaultListModel modeloLista;
+    ListSelectionModel modeloSeleccionLista;
 
     // Metodo lanzador
     public void initGUI(){
@@ -58,6 +61,7 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
         textLetras = new JTextField();
         labelNumeros = new JLabel("Introduccion solo numeros");
         labelLetras = new JLabel("Introduccion solo numeros");
+        labelLista = new JLabel("Lista de elementos");
         // Botones
         botonEjecutar = new JButton("Ejecutar acciones");
         // Spinner
@@ -67,10 +71,14 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
         // Combo
         modeloCombo = new DefaultComboBoxModel();
         comboNormal = new JComboBox(modeloCombo);
+        // Lista
+        modeloLista = new DefaultListModel();
+        listaRellenable = new JList(modeloLista);
+        modeloSeleccionLista = listaRellenable.getSelectionModel();
     }
     private void acciones() {
         botonEjecutar.addActionListener(this);
-        // Textfield
+        // Textfield y restricciones
         textLetras.addFocusListener(this);
         textNumeros.addFocusListener(this);
         textLetras.addKeyListener(new ManejoTeclasString());
@@ -95,7 +103,7 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
         return panelSur;
     }
     private JPanel configurarCentro() {
-        panelCentro.setLayout(new GridLayout(5,2));
+        panelCentro.setLayout(new GridLayout(6,2));
         panelCentro.add(labelElementos);
         panelCentro.add(textElemento);
         panelCentro.add(labelSpinner);
@@ -106,6 +114,8 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
         panelCentro.add(textLetras);
         panelCentro.add(labelNumeros);
         panelCentro.add(textNumeros);
+        panelCentro.add(labelLista);
+        panelCentro.add(new JScrollPane(listaRellenable));
         return panelCentro;
     }
     // Spinner
@@ -122,6 +132,7 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
             System.out.println("Ejecutando acciones");
             datosSpinner.add(textElemento.getText().toString());
             modeloCombo.addElement(textElemento.getText().toString());
+            modeloLista.addElement(textElemento.getText().toString());
         }
     }
     // Focus textsfield
@@ -158,7 +169,7 @@ public class Ventana extends JFrame implements ActionListener, FocusListener {
             }
         }
     }
-    // Restricciones teclas
+    // Restricciones teclas 2
     class ManejoTeclasInteger extends KeyAdapter {
         @Override
         public void keyTyped(KeyEvent e) {

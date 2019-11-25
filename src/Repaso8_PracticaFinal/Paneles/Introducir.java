@@ -81,7 +81,7 @@ public class Introducir extends JPanel implements ListSelectionListener, ChangeL
         // Botones
         buttonInsertar = new JButton("Insertar Datos");
         buttonSalir = new JButton("Salir");
-        // Lista
+        // Lista personas
         listaPersonas = new ArrayList();
     }
     private void acciones() {
