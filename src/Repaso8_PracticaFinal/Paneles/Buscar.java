@@ -70,6 +70,7 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
         modeloListaResultados = new DefaultListModel();
         listaResultados = new JList(modeloListaResultados);
         modeloSeleccionListaResultados = listaResultados.getSelectionModel();
+        listaResultados.addListSelectionListener(this);
         // Botones
         buttonBuscar = new JButton("Buscar");
         buttonSalir = new JButton("Salir");
@@ -151,7 +152,7 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
                 if (!listaPersonasRecogida.isEmpty()) {
                     for (Persona personaEncontrada : listaPersonasRecogida) {
                         if (personaEncontrada.getTelefono().equals(TelefonoIntro)){
-                            modeloListaResultados.addElement(personaEncontrada.getNombre()+" - "+personaEncontrada.getEstudios());
+                            modeloListaResultados.addElement(personaEncontrada+" - "+personaEncontrada.getEstudios());
                         }
                     }
                 }
@@ -172,8 +173,13 @@ public class Buscar extends JPanel implements ActionListener, ListSelectionListe
     }
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting()){
-            System.out.println("Valor cambiado");
+        if(e.getSource() == listaResultados){
+            if (e.getValueIsAdjusting()){
+                System.out.println("Valor cambiado");
+                Persona personaListada = (Persona) listaResultados.getModel().getElementAt(listaResultados.getSelectedIndex());
+                JOptionPane.showMessageDialog(Buscar.this,personaListada.getNombre(),
+                        "Titulo del mensaje", JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
     }
 }

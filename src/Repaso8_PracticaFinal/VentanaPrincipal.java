@@ -24,6 +24,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         JPanel panelCentro;
         Introducir panelIntroducir;
         Buscar panelBuscar;
+
     // Metodo lanzador
     public void initGUI(){
         this.setTitle("Proyecto CV");
@@ -61,6 +62,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
     private void acciones() {
         itemBuscar.addActionListener(this);
         itemIntroducir.addActionListener(this);
+
     }
     // Metodos para configurar centro y CardLayout
     private void configurarContainer() {

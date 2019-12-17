@@ -1,14 +1,14 @@
-package Repaso8_PracticaFinal;
+package Worker;
 
-        import javax.swing.*;
+import javax.swing.*;
 
 public class Entrada {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-                ventanaPrincipal.initGUI();
+                Ventana ventana = new Ventana();
+                ventana.initGUI();
             }
         });
     }
