@@ -3,14 +3,15 @@ package Worker_Practica.Workers;
 import Worker_Practica.ObjetoPanel;
 
 import javax.swing.*;
+import java.util.List;
 
-/*public class MiWorker extends SwingWorker<Boolean,Integer> {
+public class MiWorker extends SwingWorker<Boolean,Integer> {
     ObjetoPanel objetoPanelLocal;
 
     @Override
     protected Boolean doInBackground() throws Exception {
             for (int i = 0;i<Integer.valueOf(objetoPanelLocal.getFieldCalcular().getText());i++){
-                objetoPanelLocal.getBarraProgreso().setMaximum(Integer.valueOf(objetoPanelLocal.getFieldCalcular().getText());
+                objetoPanelLocal.getBarraProgreso().setMaximum(Integer.valueOf(objetoPanelLocal.getFieldCalcular().getText()));
                 Thread.sleep(100);
                 publish(i);
             }
@@ -26,6 +27,4 @@ import javax.swing.*;
         protected void process(List<Integer> chunks) {
             super.process(chunks);
         }
-        return null;
-    }
-}*/
+}

@@ -91,7 +91,7 @@ public class ObjetoPanel extends JPanel implements ActionListener {
         }
     }
 
-    /*class WorkerPropio extends SwingWorker<Boolean,Integer>{
+    class WorkerPropio extends SwingWorker<Boolean,Integer>{
         JProgressBar barra;
         WorkerPropio(JProgressBar barra){
             this.barra = barra;
@@ -117,5 +117,5 @@ public class ObjetoPanel extends JPanel implements ActionListener {
             super.process(chunks);
             textArea.append(String.valueOf(chunks.get(0))+"\n");
         }
-    }*/
+    }
 }
