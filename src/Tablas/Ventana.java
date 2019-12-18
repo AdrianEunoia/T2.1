@@ -43,7 +43,7 @@ public class Ventana extends JFrame {
         container.add(panelPestanias);
         panelPestanias.addTab("Altas", panelAltas);
         panelPestanias.addTab("Bajas", panelBajas);
-        //panelPestanias.addTab("Modificaciones", panelModificaciones);
-        //panelPestanias.addTab("Resumen", panelResumen);
+        panelPestanias.addTab("Modificaciones", panelModificaciones);
+        panelPestanias.addTab("Resumen", panelResumen);
     }
 }

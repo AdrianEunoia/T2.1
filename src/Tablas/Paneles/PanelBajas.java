@@ -21,6 +21,8 @@ public class PanelBajas extends JPanel implements ItemListener, ActionListener {
     // Spinner
     DefaultComboBoxModel modeloCombo;
     JComboBox comboPersonas;
+    // Paneles colegas
+    PanelAltas panelAltas;
 
     // Constructor
     public PanelBajas() {
@@ -134,19 +136,18 @@ public class PanelBajas extends JPanel implements ItemListener, ActionListener {
             System.out.println("Persona añadida a combo de bajas con nombre: "+DatosPersona.encontrarPersona(personaEncontrada).getNombre());
         }
     }
-
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == comboPersonas) {
             if (comboPersonas.getModel().getSelectedItem() != null) {
-                Persona aux = DatosPersona.encontrarPersona((String) comboPersonas.getModel().getSelectedItem());
-                System.out.println(aux.getNombre());
-                nombreText.setText(aux.getNombre());
-                apellidoText.setText(aux.getApellido());
-                edadText.setText(String.valueOf(aux.getEdad()));
-                calleText.setText(aux.getCalle());
-                numeroText.setText(String.valueOf(aux.getNumeroTelf()));
-                codigoPostalText.setText(String.valueOf(aux.getCp()));
+                Persona personaEncontrada = DatosPersona.encontrarPersona((String) comboPersonas.getModel().getSelectedItem());
+                System.out.println(personaEncontrada.getNombre());
+                nombreText.setText(personaEncontrada.getNombre());
+                apellidoText.setText(personaEncontrada.getApellido());
+                edadText.setText(String.valueOf(personaEncontrada.getEdad()));
+                calleText.setText(personaEncontrada.getCalle());
+                numeroText.setText(String.valueOf(personaEncontrada.getNumeroTelf()));
+                codigoPostalText.setText(String.valueOf(personaEncontrada.getCp()));
             }
         }
     }
@@ -163,6 +164,7 @@ public class PanelBajas extends JPanel implements ItemListener, ActionListener {
                 JOptionPane.showMessageDialog(this, "No puedes dejar la lista totalmente vacia!", "Atencion!", JOptionPane.WARNING_MESSAGE, null);
             }
             configurarModeloCombo();
+            panelAltas.configurarModelComboModificaciones();
         }
     }
 }

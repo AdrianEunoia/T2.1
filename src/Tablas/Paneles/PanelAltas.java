@@ -114,7 +114,7 @@ public class PanelAltas extends JPanel implements ActionListener {
                     Integer.valueOf(codigoPostalText.getText()), Integer.valueOf(numeroText.getText())))) {
                 // Notifico cambio en modelo combo
                 panelBajas.configurarModeloCombo();
-                //panelModificaciones.configurarModeloCombo();
+                panelModificaciones.configurarModeloCombo();
                 // Vacio campos
                 nombreText.setText("");
                 claveText.setText("");
@@ -125,5 +125,12 @@ public class PanelAltas extends JPanel implements ActionListener {
                 numeroText.setText("");
             }
         }
+    }
+    // Actualizaciones combos
+    public void configurarModelComboBajas() {
+        panelBajas.configurarModeloCombo();
+    }
+    public void configurarModelComboModificaciones() {
+        panelModificaciones.configurarModeloCombo();
     }
 }
