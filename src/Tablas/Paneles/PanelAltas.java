@@ -115,6 +115,7 @@ public class PanelAltas extends JPanel implements ActionListener {
                 // Notifico cambio en modelo combo
                 panelBajas.configurarModeloCombo();
                 panelModificaciones.configurarModeloCombo();
+                panelResumen.refrescarDatos();
                 // Vacio campos
                 nombreText.setText("");
                 claveText.setText("");
