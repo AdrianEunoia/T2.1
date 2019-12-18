@@ -1,10 +1,17 @@
 package Tablas.Paneles;
 
+import Tablas.Utiles.DatosPersona;
+import Tablas.Utiles.Persona;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class PanelBajas extends JPanel {
+public class PanelBajas extends JPanel implements ItemListener, ActionListener {
     // Elementos
     JLabel labelClave, labelNombre, labelApellidos, labelEdad, labelCalle, labelNumero, labelCodigoPostal;
     JTextField  nombreText, apellidoText, edadText,calleText,numeroText,codigoPostalText;
@@ -13,7 +20,7 @@ public class PanelBajas extends JPanel {
     TitledBorder tituloPersona,tituloDireccion,tituloClave;
     // Spinner
     DefaultComboBoxModel modeloCombo;
-    JComboBox clave;
+    JComboBox comboPersonas;
 
     // Constructor
     public PanelBajas() {
@@ -23,7 +30,7 @@ public class PanelBajas extends JPanel {
     public void initGUI(){
         instancias();
         configurarPanel();
-        //configurarModeloCombo();
+        configurarModeloCombo();
         acciones();
     }
     // Instancias
@@ -34,7 +41,7 @@ public class PanelBajas extends JPanel {
         tituloClave = new TitledBorder("Seleccion Clave");
         // Spinner
         modeloCombo = new DefaultComboBoxModel();
-        clave = new JComboBox(modeloCombo);
+        comboPersonas = new JComboBox(modeloCombo);
         // Elementos
         labelClave = new JLabel("Clave");
         labelNombre = new JLabel("Nombre: ");
@@ -45,21 +52,15 @@ public class PanelBajas extends JPanel {
         labelCodigoPostal = new JLabel("Codigo Postal: ");
         nombreText = new JTextField();
         nombreText.setEnabled(false);
-        nombreText.setBackground(Color.lightGray);
         apellidoText = new JTextField();
         apellidoText.setEnabled(false);
-        apellidoText.setBackground(Color.lightGray);
         edadText = new JTextField();
         edadText.setEnabled(false);
-        edadText.setBackground(Color.lightGray);
         calleText = new JTextField();
         calleText.setEnabled(false);
-        calleText.setBackground(Color.lightGray);
         numeroText = new JTextField();
         numeroText.setEnabled(false);
-        numeroText.setBackground(Color.lightGray);
         codigoPostalText = new JTextField();
-        codigoPostalText.setBackground(Color.lightGray);
         codigoPostalText.setEnabled(false);
         btnBaja = new JButton("Dar de Baja");
         panelInferior = new JPanel();
@@ -91,7 +92,7 @@ public class PanelBajas extends JPanel {
         panelclave.setBorder(BorderFactory.createTitledBorder("Selección clave"));
         panelclave.setLayout(new GridLayout(1,2));
         panelclave.add(new JLabel("Clave: "));
-        panelclave.add(clave);
+        panelclave.add(comboPersonas);
         return panelclave;
     }
     private JPanel configurarPanelArriba(){
@@ -122,6 +123,46 @@ public class PanelBajas extends JPanel {
     }
     // Acciones
     private void acciones() {
+        comboPersonas.addItemListener(this);
+        btnBaja.addActionListener(this);
+    }
+    // Combo
+    public void configurarModeloCombo() {
+        modeloCombo.removeAllElements();
+        for (String personaEncontrada: DatosPersona.cogerClaves()) {
+            modeloCombo.addElement(personaEncontrada);
+            System.out.println("Persona añadida a combo de bajas con nombre: "+DatosPersona.encontrarPersona(personaEncontrada).getNombre());
+        }
+    }
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getSource() == comboPersonas) {
+            if (comboPersonas.getModel().getSelectedItem() != null) {
+                Persona aux = DatosPersona.encontrarPersona((String) comboPersonas.getModel().getSelectedItem());
+                System.out.println(aux.getNombre());
+                nombreText.setText(aux.getNombre());
+                apellidoText.setText(aux.getApellido());
+                edadText.setText(String.valueOf(aux.getEdad()));
+                calleText.setText(aux.getCalle());
+                numeroText.setText(String.valueOf(aux.getNumeroTelf()));
+                codigoPostalText.setText(String.valueOf(aux.getCp()));
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnBaja) {
+            int numeroPersonas = comboPersonas.getItemCount();
+            if(numeroPersonas > 1) {
+                System.out.println("Borrando persona");
+                String claveBorrar = (String) comboPersonas.getSelectedItem();
+                DatosPersona.eliminarPersona(claveBorrar);
+            }else{
+                JOptionPane.showMessageDialog(this, "No puedes dejar la lista totalmente vacia!", "Atencion!", JOptionPane.WARNING_MESSAGE, null);
+            }
+            configurarModeloCombo();
+        }
     }
 }

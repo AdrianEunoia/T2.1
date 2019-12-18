@@ -1,5 +1,8 @@
 package Tablas.Paneles;
 
+import Tablas.Utiles.DatosPersona;
+import Tablas.Utiles.Persona;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -105,6 +108,22 @@ public class PanelAltas extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == btnAlta){
+            // Introduzco persona
+            if (DatosPersona.añadirPersona(new Persona(nombreText.getText(), claveText.getText(), apellidoText.getText(), calleText.getText(), Integer.valueOf(edadText.getText()),
+                    Integer.valueOf(codigoPostalText.getText()), Integer.valueOf(numeroText.getText())))) {
+                // Notifico cambio en modelo combo
+                panelBajas.configurarModeloCombo();
+                //panelModificaciones.configurarModeloCombo();
+                // Vacio campos
+                nombreText.setText("");
+                claveText.setText("");
+                apellidoText.setText("");
+                calleText.setText("");
+                edadText.setText("");
+                codigoPostalText.setText("");
+                numeroText.setText("");
+            }
+        }
     }
 }
